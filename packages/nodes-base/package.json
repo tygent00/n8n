@@ -845,7 +845,8 @@
       "dist/nodes/Transform/RemoveDuplicates/RemoveDuplicates.node.js",
       "dist/nodes/Transform/SplitOut/SplitOut.node.js",
       "dist/nodes/Transform/Sort/Sort.node.js",
-      "dist/nodes/Transform/Summarize/Summarize.node.js"
+      "dist/nodes/Transform/Summarize/Summarize.node.js",
+      "dist/nodes/Tygent/Tygent.node.js"
     ]
   },
   "devDependencies": {
@@ -947,6 +948,7 @@
     "uuid": "catalog:",
     "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.2/xlsx-0.20.2.tgz",
     "xml2js": "catalog:",
-    "xmlhttprequest-ssl": "3.1.0"
+    "xmlhttprequest-ssl": "3.1.0",
+    "tygent-js": "workspace:*"
   }
 }
