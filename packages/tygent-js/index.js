@@ -6,4 +6,15 @@ class Agent {
 		return `Result for ${prompt} using model ${this.model}`;
 	}
 }
-module.exports = { Agent };
+
+async function accelerate(dag, _options = {}) {
+	// Simplistic optimization: move trigger nodes to the start
+	const triggerNodes = dag.nodes.filter((n) => n.type.toLowerCase().includes('trigger'));
+	const otherNodes = dag.nodes.filter((n) => !n.type.toLowerCase().includes('trigger'));
+	return {
+		nodes: [...triggerNodes, ...otherNodes],
+		connections: dag.connections,
+	};
+}
+
+module.exports = { Agent, accelerate };

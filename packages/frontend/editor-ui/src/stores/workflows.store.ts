@@ -1767,6 +1767,15 @@ export const useWorkflowsStore = defineStore(STORES.WORKFLOWS, () => {
 		}
 	}
 
+	async function optimizeWorkflow(workflowData: IWorkflowDb): Promise<IWorkflowDb> {
+		return await makeRestApiRequest<IWorkflowDb>(
+			rootStore.restApiContext,
+			'POST',
+			'/tygent/optimize',
+			{ workflow: workflowData } as unknown as IDataObject,
+		);
+	}
+
 	async function removeTestWebhook(targetWorkflowId: string): Promise<boolean> {
 		return await makeRestApiRequest(
 			rootStore.restApiContext,
@@ -2054,6 +2063,7 @@ export const useWorkflowsStore = defineStore(STORES.WORKFLOWS, () => {
 		createNewWorkflow,
 		updateWorkflow,
 		runWorkflow,
+		optimizeWorkflow,
 		removeTestWebhook,
 		fetchExecutionDataById,
 		deleteExecution,

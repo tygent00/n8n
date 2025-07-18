@@ -19,6 +19,7 @@ import FocusPanel from '@/components/FocusPanel.vue';
 import { useNodeTypesStore } from '@/stores/nodeTypes.store';
 import { useUIStore } from '@/stores/ui.store';
 import CanvasRunWorkflowButton from '@/components/canvas/elements/buttons/CanvasRunWorkflowButton.vue';
+import CanvasOptimizeWorkflowButton from '@/components/canvas/elements/buttons/CanvasOptimizeWorkflowButton.vue';
 import { useI18n } from '@n8n/i18n';
 import { useWorkflowsStore } from '@/stores/workflows.store';
 import { useRunWorkflow } from '@/composables/useRunWorkflow';
@@ -1435,6 +1436,13 @@ function onRunWorkflowButtonMouseLeave() {
 	nodeViewEventBus.emit('runWorkflowButton:mouseleave');
 }
 
+async function onOptimizeWorkflow() {
+	const workflowData = await workflowHelpers.getWorkflowDataToSave();
+	const optimized = await workflowsStore.optimizeWorkflow(workflowData as IWorkflowDb);
+	workflowsStore.setNodes(optimized.nodes as unknown as INodeUi[]);
+	workflowsStore.setConnections(optimized.connections, true);
+}
+
 /**
  * Chat
  */
@@ -2086,6 +2094,10 @@ onBeforeUnmount(() => {
 					@mouseleave="onRunWorkflowButtonMouseLeave"
 					@execute="runEntireWorkflow('main')"
 					@select-trigger-node="workflowsStore.setSelectedTriggerNodeName"
+				/>
+				<CanvasOptimizeWorkflowButton
+					v-if="isRunWorkflowButtonVisible"
+					@click="onOptimizeWorkflow"
 				/>
 				<template v-if="containsChatTriggerNodes">
 					<CanvasChatButton
