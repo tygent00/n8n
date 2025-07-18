@@ -1,6 +1,7 @@
 import { Service } from '@n8n/di';
 import { accelerate } from 'tygent-js';
-import type { IWorkflowDb } from 'n8n-workflow';
+import type { INode } from 'n8n-workflow';
+import type { IWorkflowDb } from '@n8n/db';
 
 @Service()
 export class TygentService {
@@ -9,7 +10,7 @@ export class TygentService {
 	 * Uses the local `tygent-js` package which reorders trigger nodes first.
 	 */
 	async optimize(workflow: IWorkflowDb): Promise<IWorkflowDb> {
-		const triggerNode = workflow.nodes.find((n) => n.type.toLowerCase().includes('trigger'));
+		const triggerNode = workflow.nodes.find((n: INode) => n.type.toLowerCase().includes('trigger'));
 		const dag = this.extractDag(triggerNode, workflow);
 		const optimized = await accelerate(dag);
 		return this.buildWorkflow(optimized, workflow);

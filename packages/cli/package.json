@@ -144,6 +144,7 @@
     "n8n-editor-ui": "workspace:*",
     "n8n-nodes-base": "workspace:*",
     "n8n-workflow": "workspace:*",
+    "tygent-js": "workspace:*",
     "nanoid": "catalog:",
     "nodemailer": "6.9.9",
     "oauth-1.0a": "2.2.6",
