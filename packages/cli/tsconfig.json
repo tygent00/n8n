@@ -11,7 +11,9 @@
 		"paths": {
 			"@/*": ["./*"],
 			"@test/*": ["../test/shared/*"],
-			"@test-integration/*": ["../test/integration/shared/*"]
+			"@test-integration/*": ["../test/integration/shared/*"],
+			"tygent-js": ["../../tygent-js"],
+			"tygent-js/*": ["../../tygent-js/*"]
 		},
 		"tsBuildInfoFile": "dist/typecheck.tsbuildinfo",
 		// TODO: remove all options below this line
