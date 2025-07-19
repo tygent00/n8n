@@ -72,6 +72,8 @@ export class ControllerRegistry {
 							else {
 								return res.status(400).json(output.error.errors[0]);
 							}
+						} else {
+							args.push(req[arg.type]);
 						}
 					} else throw new UnexpectedError('Unknown arg type: ' + arg.type);
 				}
